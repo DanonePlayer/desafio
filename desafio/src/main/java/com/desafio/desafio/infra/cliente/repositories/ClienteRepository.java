@@ -42,7 +42,7 @@ public class ClienteRepository implements IClienteRepository{
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         this.jpaClienteRepository.deleteById(id);
     }
 

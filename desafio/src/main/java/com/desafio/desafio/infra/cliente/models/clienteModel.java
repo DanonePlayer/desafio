@@ -35,6 +35,9 @@ public class ClienteModel {
     }
 
     public Cliente toEntity() {
-        return new Cliente(id, nome);
+        return new Cliente(
+            id == null ? null : id,
+            nome == null ? null : nome
+        );
     }
 }

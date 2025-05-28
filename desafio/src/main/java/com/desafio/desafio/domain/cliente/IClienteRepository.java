@@ -9,7 +9,7 @@ public interface IClienteRepository {
     Cliente getById(Long id);
     Cliente create (Cliente cliente);
     Cliente update (Cliente cliente);
-    void delete (Long id);
+    void deleteById (Long id);
     List<Cliente> getAll();
 
 }

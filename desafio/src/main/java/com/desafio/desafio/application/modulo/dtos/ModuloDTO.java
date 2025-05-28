@@ -19,4 +19,11 @@ public class ModuloDTO {
         this.id = modulo.getId();
         this.nome = modulo.getNome();
     }
+
+    public Modulo toEntity() {
+        return new Modulo(
+            id == null ? null : id,
+            nome == null ? null : nome
+        );
+    }
 }

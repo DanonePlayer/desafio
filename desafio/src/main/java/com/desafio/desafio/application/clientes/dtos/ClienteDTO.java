@@ -19,4 +19,11 @@ public class ClienteDTO {
         this.id = cliente.getId();
         this.nome = cliente.getNome();
     }
+
+    public Cliente toEntity() {
+        return new Cliente(
+            id == null ? null : id,
+            nome == null ? null : nome
+        );
+    }
 }

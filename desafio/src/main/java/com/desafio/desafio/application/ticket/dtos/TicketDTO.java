@@ -5,6 +5,7 @@ import java.util.Date;
 import com.desafio.desafio.application.clientes.dtos.ClienteDTO;
 import com.desafio.desafio.application.modulo.dtos.ModuloDTO;
 import com.desafio.desafio.domain.ticket.entities.Ticket;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -17,12 +18,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String titulo;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ClienteDTO codCliente;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ModuloDTO codModulo;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty(required = false)
     private Date dataAbertura;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty(required = false)
     private Date dataEncerramento;
 
@@ -33,5 +45,16 @@ public class TicketDTO {
         this.codModulo = new ModuloDTO(ticket.getCodModulo());
         this.dataAbertura = ticket.getDataAbertura();
         this.dataEncerramento = ticket.getDataEncerramento();
+    }
+
+    public Ticket toEntity() {
+        return new Ticket(
+            id == null ? null : id,
+            titulo == null ? null : titulo,
+            codCliente == null ? null : codCliente.toEntity(),
+            codModulo == null ? null : codModulo.toEntity(),
+            dataAbertura == null ? null : dataAbertura,
+            dataEncerramento == null ? null : dataEncerramento
+        );
     }
 }

@@ -35,7 +35,7 @@ A API permite:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/DanonePlayer.git
+git clone https://github.com/DanonePlayer.git
 cd desafio
 
 # Build do projeto com Maven

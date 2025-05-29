@@ -32,7 +32,7 @@ public class CreateTicketUseCase implements IUseCase<TicketDTO, TicketDTO> {
                 cliente,
                 modulo,
                 new Date(),
-                null
+                ticketDTO.getDataEncerramento()
             )
         );
 

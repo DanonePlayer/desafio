@@ -13,6 +13,10 @@ import lombok.Setter;
 @Setter
 public class TicketDTOListCustom {
     @JsonIgnore
+    private String mes;
+    @JsonIgnore
+    private String ano;
+    @JsonIgnore
     private boolean orderByClient;
     @JsonIgnore
     private boolean orderByModule;

@@ -27,9 +27,11 @@ public class TicketController {
     @GetMapping("/list")
     public ResponseEntity<List<TicketDTO>> getAll(
         @RequestParam(required = false) boolean orderByClient,
-        @RequestParam(required = false) boolean orderByModulo
+        @RequestParam(required = false) boolean orderByModulo,
+        @RequestParam(required = false) String mes,
+        @RequestParam(required = false) String ano
     ) {
-        TicketDTOListCustom ticketDTOListCustom = new TicketDTOListCustom(orderByClient, orderByModulo);
+        TicketDTOListCustom ticketDTOListCustom = new TicketDTOListCustom(mes, ano, orderByClient, orderByModulo);
         List<TicketDTO> toReturn = ticketService.getAllTickets(ticketDTOListCustom);
 
         return new ResponseEntity<List<TicketDTO>>(toReturn, HttpStatus.OK);

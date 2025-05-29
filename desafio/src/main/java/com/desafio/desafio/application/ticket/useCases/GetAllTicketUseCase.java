@@ -23,7 +23,21 @@ public class GetAllTicketUseCase implements IUseCase<TicketDTOListCustom, List<T
     @Override
     public List<TicketDTO> execute(TicketDTOListCustom ticketDTOListCustom) {
         List<Ticket> tickets = new ArrayList<>(ticketRepository.getAll()); 
-        
+        if (ticketDTOListCustom.getMes() != null && ticketDTOListCustom.getAno() != null) {
+            String mes = ticketDTOListCustom.getMes();
+            String ano = ticketDTOListCustom.getAno();
+            tickets.removeIf(ticket -> {
+                if (ticket.getDataAbertura() == null) {
+                    return true;
+                }
+                String ticketMes = String.format("%02d", ticket.getDataAbertura().getMonth() + 1);
+                String ticketAno = String.valueOf(ticket.getDataAbertura().getYear() + 1900);
+                
+                System.out.println("Mes: " + ticketMes.equals(mes) + ", Ano: " + ticketAno.equals(ano));
+                return !ticketMes.equals(mes) || !ticketAno.equals(ano);
+                
+            });
+        }
         if (ticketDTOListCustom.isOrderByClient()) {
             tickets.sort(Comparator.comparing(ticket -> ticket.getCodCliente().getNome()));
         } else if (ticketDTOListCustom.isOrderByModule()) {

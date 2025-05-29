@@ -41,8 +41,17 @@ public class TicketDTO {
     public TicketDTO(Ticket ticket) {
         this.id = ticket.getId();
         this.titulo = ticket.getTitulo();
-        this.codCliente = new ClienteDTO(ticket.getCodCliente());
-        this.codModulo = new ModuloDTO(ticket.getCodModulo());
+
+        if (ticket.getCodCliente() != null) {
+            this.codCliente = new ClienteDTO(ticket.getCodCliente());
+        } else {
+            this.codCliente = null;
+        }
+        if (ticket.getCodModulo() != null) {
+            this.codModulo = new ModuloDTO(ticket.getCodModulo());
+        } else {
+            this.codModulo = null;
+        }
         this.dataAbertura = ticket.getDataAbertura();
         this.dataEncerramento = ticket.getDataEncerramento();
     }

@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -32,23 +33,40 @@ public class TicketModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(name = "title")
     private String titulo;
 
     @ManyToOne
+    @JoinColumn(name = "fk_id_client")
     private ClienteModel codCliente;
 
     @ManyToOne
+    @JoinColumn(name = "fk_id_module")
     private ModuloModel codModulo;
 
-    @Column
+    @Column(name = "opening_date")
     private Date dataAbertura;
-    @Column
+    @Column(name = "closing_date")
     private java.sql.Date dataEncerramento;
 
     public TicketModel(Ticket ticket) {
         this.id = ticket.getId();
         this.titulo = ticket.getTitulo();
+
+        if (ticket.getCodCliente() != null) {
+            this.codCliente = new ClienteModel(ticket.getCodCliente());
+        } else {
+            this.codCliente = null;
+        }
+
+        if (ticket.getCodModulo() != null) {
+            this.codModulo = new ModuloModel(ticket.getCodModulo());
+        } else {
+            this.codModulo = null;
+        }
+
+        this.dataAbertura = ticket.getDataAbertura();
+        this.dataEncerramento = ticket.getDataEncerramento() != null ? new java.sql.Date(ticket.getDataEncerramento().getTime()) : null;
     }
 
     public Ticket toEntity() {

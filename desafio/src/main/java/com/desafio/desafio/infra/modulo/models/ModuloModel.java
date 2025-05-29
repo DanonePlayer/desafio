@@ -25,7 +25,7 @@ public class ModuloModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
+    @Column
     private String nome;
 
     public ModuloModel(Modulo nome) {

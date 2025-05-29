@@ -15,8 +15,4 @@ public class Modulo {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public Modulo(Long id) {
-        this.id = id;
-    }
 }
